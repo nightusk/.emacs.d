@@ -118,6 +118,22 @@
     (add-to-list 'sly-contribs 'sly-asdf)))
 #+end_src
 
+* text-mode
+
+** org-mode
+#+begin_src elisp
+(use-package org
+  :bind
+  ("C-c l" . org-store-link)
+  ("C-c a" . org-agenda)
+  ("C-c c" . org-capture)
+  :config
+  (setopt org-startup-folded 'content)
+  (use-package org-modern :ensure t
+    :config
+    (global-org-modern-mode +1)))
+#+end_src
+
 * Local Variables                                                  :noexport:
 # Local Variables:
 # org-edit-src-content-indentation: 0
