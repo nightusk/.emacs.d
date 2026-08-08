@@ -18,6 +18,7 @@
           init-file-debug t
           initial-scratch-message ""
           make-backup-files nil
+          package-install-upgrade-built-in t
           read-extended-command-predicate #'command-completion-default-include-p
           show-trailing-whitespace t
           tab-always-indent 'complete
@@ -131,7 +132,11 @@
   (setopt org-startup-folded 'content)
   (use-package org-modern :ensure t
     :config
-    (global-org-modern-mode +1)))
+    (global-org-modern-mode +1))
+  (use-package org-roam :ensure t
+    :config
+    (setopt org-roam-directory (file-truename org-directory))
+    (org-roam-db-autosync-mode +1)))
 #+end_src
 
 * Local Variables                                                  :noexport:
