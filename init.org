@@ -6,6 +6,9 @@
 (use-package emacs
   :bind
   ("C-c C-h" . help-command)
+  ("C-c a" . org-agenda)
+  ("C-c c" . org-capture)
+  ("C-c l" . org-store-link)
   :config
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
   (add-to-list 'safe-local-eval-forms
@@ -18,10 +21,12 @@
           init-file-debug t
           initial-scratch-message ""
           make-backup-files nil
+          org-startup-folded 'content
           package-install-upgrade-built-in t
           read-extended-command-predicate #'command-completion-default-include-p
           show-trailing-whitespace t
           tab-always-indent 'complete
+          use-package-compute-statistics t
           use-short-answers t)
   (delete-selection-mode +1)
   (editorconfig-mode +1)
@@ -112,6 +117,8 @@
 (use-package sly :ensure t
   :init
   (setopt inferior-lisp-program "sbcl")
+  :commands
+  sly
   :config
   (add-to-list 'sly-contribs 'sly-autodoc)
   (use-package sly-asdf :ensure t
@@ -122,21 +129,28 @@
 * text-mode
 
 ** org-mode
+
+*** org-modern
 #+begin_src elisp
-(use-package org
+(use-package org-modern :ensure t
+  :hook
+  (org-mode . org-modern-mode)
+  (org-agenda-finalize . org-modern-agenda))
+#+end_src
+
+*** org-roam
+#+begin_src elisp
+(use-package org-roam :ensure t
   :bind
-  ("C-c l" . org-store-link)
-  ("C-c a" . org-agenda)
-  ("C-c c" . org-capture)
+  ("C-c n c" . org-roam-capture)
+  ("C-c n f" . org-roam-node-find)
+  ("C-c n g" . org-roam-graph)
+  ("C-c n i" . org-roam-node-insert)
+  ("C-c n j" . org-roam-dailies-capture-today)
+  ("C-c n l" . org-roam-buffer-toggle)
   :config
-  (setopt org-startup-folded 'content)
-  (use-package org-modern :ensure t
-    :config
-    (global-org-modern-mode +1))
-  (use-package org-roam :ensure t
-    :config
-    (setopt org-roam-directory (file-truename org-directory))
-    (org-roam-db-autosync-mode +1)))
+  (setopt org-roam-directory (file-truename org-directory))
+  (org-roam-db-autosync-mode +1))
 #+end_src
 
 * Local Variables                                                  :noexport:
