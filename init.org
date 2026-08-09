@@ -14,7 +14,7 @@
   (add-to-list 'safe-local-eval-forms
                '(add-hook 'after-save-hook #'org-babel-tangle nil t))
   (keyboard-translate ?\C-h ?\d)
-  (load-theme (if (display-graphic-p) 'modus-operandi 'modus-vivendi))
+  (load-theme (if (display-graphic-p) 'modus-vivendi-tinted 'modus-vivendi))
   (setopt auto-save-default nil
           create-lockfiles nil
           inhibit-startup-screen t
