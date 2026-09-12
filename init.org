@@ -149,7 +149,15 @@
   ("C-c n j" . org-roam-dailies-capture-today)
   ("C-c n l" . org-roam-buffer-toggle)
   :config
-  (setopt org-roam-directory (file-truename org-directory))
+  (setopt org-roam-directory (file-truename org-directory)
+          org-roam-capture-templates '(("d" "default" plain "%?"
+                                        :target
+                                        (file+head
+                                         "%<%G/W%V/%Y%m%d-%H%M%S%3N>.org"
+                                         "#+title: ${title}
+")
+  :unnarrowed t))
+)
   (org-roam-db-autosync-mode +1))
 #+end_src
 
