@@ -1,3 +1,4 @@
+*.eld
 .org-id-locations
 auto-save-list
 bookmarks
@@ -7,6 +8,7 @@ elpa
 eshell
 history
 init.el
+org-persist
 org-roam.db
 places
 recentf

@@ -13,7 +13,6 @@
 
 (setopt custom-file (locate-user-emacs-file "custom.el"))
 
-(add-to-list 'default-frame-alist '(alpha-background . 60))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (menu-bar-mode -1)
 (tool-bar-mode -1)

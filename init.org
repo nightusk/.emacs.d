@@ -3,14 +3,22 @@
 * builtin configuration
 #+begin_src elisp
 ;;; init.el -*- lexical-binding: t; -*-
+(eval-and-compile
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t))
+
 (use-package emacs
   :bind
   ("C-c C-h" . help-command)
   ("C-c a" . org-agenda)
   ("C-c c" . org-capture)
   ("C-c l" . org-store-link)
+  :init
+  (when window-system
+    (pcase system-type
+      ('windows-nt (add-to-list 'default-frame-alist '(alpha . (60 . 85))))
+      (_ (add-to-list 'default-frame-alist '(alpha-background . 60)))))
   :config
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
   (add-to-list 'safe-local-eval-forms
                '(add-hook 'after-save-hook #'org-babel-tangle nil t))
   (keyboard-translate ?\C-h ?\d)
